@@ -1,0 +1,73 @@
+﻿@model IEnumerable<SachOnline.Models.sach>
+
+@{
+    ViewBag.Title = "Trang Chủ";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<style type="text/css">
+    .imgbook {
+        transition: all 1s ease-in;
+        width: 400px;
+    }
+
+        .imgbook:hover {
+            transform: scale(0.9);
+            cursor: pointer;
+        }
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+</style>
+
+<h2 class="text-center">SÁCH MỚI</h2>
+<hr>
+<div class="row text-center">
+    <div class="row text-center">
+        @foreach (var sach in Model)
+        {
+            <div class="col-sm-4 col-lg-4 col-xs-6">
+                <div class="thumbnail">
+                    <img src="~/Images/@sach.anhSP" alt="Thumbnail Image 1" class="img- responsive img-rounded imgbook " style="width:250px; height:350px" />
+                    <div class="caption">
+                        <h4 style="min-height:70px;">
+                            <a href="@Url.Action("ChiTietSach","SachOnline", new { id =sach.sach_id})">@sach.ten_sach</a>
+                        </h4>
+                        <p>
+                            <a href="#" class="btn btn-primary" role="button">
+                                <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Add to Cart
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<nav class="text-center">
+    <ul class="pagination justify-content-center">
+        <li>
+            <a href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        <li><a href="#">1</a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li>
+            <a href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+
+
+
+

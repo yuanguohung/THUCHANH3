@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="SachOnline" Class="dbSachOnlineDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="dbo.admin" Member="admins">
+    <Type Name="admin">
+      <Column Name="admin_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="username" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="password" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.chi_tiet_dat_hang" Member="chi_tiet_dat_hangs">
+    <Type Name="chi_tiet_dat_hang">
+      <Column Name="chi_tiet_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="don_dat_hang_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="sach_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="so_luong" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="don_dat_hang_chi_tiet_dat_hang" Member="don_dat_hang" ThisKey="don_dat_hang_id" OtherKey="don_dat_hang_id" Type="don_dat_hang" IsForeignKey="true" />
+      <Association Name="sach_chi_tiet_dat_hang" Member="sach" ThisKey="sach_id" OtherKey="sach_id" Type="sach" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.chu_de" Member="chu_des">
+    <Type Name="chu_de">
+      <Column Name="chu_de_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ten_chu_de" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="chu_de_sach" Member="saches" ThisKey="chu_de_id" OtherKey="chu_de_id" Type="sach" />
+    </Type>
+  </Table>
+  <Table Name="dbo.don_dat_hang" Member="don_dat_hangs">
+    <Type Name="don_dat_hang">
+      <Column Name="don_dat_hang_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="khach_hang_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ngay_dat" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="don_dat_hang_chi_tiet_dat_hang" Member="chi_tiet_dat_hangs" ThisKey="don_dat_hang_id" OtherKey="don_dat_hang_id" Type="chi_tiet_dat_hang" />
+      <Association Name="khach_hang_don_dat_hang" Member="khach_hang" ThisKey="khach_hang_id" OtherKey="khach_hang_id" Type="khach_hang" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.khach_hang" Member="khach_hangs">
+    <Type Name="khach_hang">
+      <Column Name="khach_hang_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ten_khach_hang" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="dia_chi" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="TaiKhoan" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="MatKhau" Type="System.String" DbType="VarChar(15)" CanBeNull="true" />
+      <Column Name="DienThoai" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="NgaySinh" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
+      <Association Name="khach_hang_don_dat_hang" Member="don_dat_hangs" ThisKey="khach_hang_id" OtherKey="khach_hang_id" Type="don_dat_hang" />
+    </Type>
+  </Table>
+  <Table Name="dbo.nha_xuat_ban" Member="nha_xuat_bans">
+    <Type Name="nha_xuat_ban">
+      <Column Name="nha_xuat_ban_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ten_nha_xuat_ban" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="dia_chi" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Association Name="nha_xuat_ban_sach" Member="saches" ThisKey="nha_xuat_ban_id" OtherKey="nha_xuat_ban_id" Type="sach" />
+    </Type>
+  </Table>
+  <Table Name="dbo.sach" Member="saches">
+    <Type Name="sach">
+      <Column Name="sach_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ten_sach" Type="System.String" DbType="VarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="tac_gia_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="nha_xuat_ban_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="gia_tien" Type="System.Decimal" DbType="Decimal(10,2) NOT NULL" CanBeNull="false" />
+      <Column Name="chu_de_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="anhSP" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="NgayCapNhap" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="mo_ta" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Association Name="sach_chi_tiet_dat_hang" Member="chi_tiet_dat_hangs" ThisKey="sach_id" OtherKey="sach_id" Type="chi_tiet_dat_hang" />
+      <Association Name="sach_viet_sach" Member="viet_saches" ThisKey="sach_id" OtherKey="sach_id" Type="viet_sach" />
+      <Association Name="nha_xuat_ban_sach" Member="nha_xuat_ban" ThisKey="nha_xuat_ban_id" OtherKey="nha_xuat_ban_id" Type="nha_xuat_ban" IsForeignKey="true" />
+      <Association Name="chu_de_sach" Member="chu_de" ThisKey="chu_de_id" OtherKey="chu_de_id" Type="chu_de" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="tac_gia_sach" Member="tac_gia" ThisKey="tac_gia_id" OtherKey="tac_gia_id" Type="tac_gia" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tac_gia" Member="tac_gias">
+    <Type Name="tac_gia">
+      <Column Name="tac_gia_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ten_tac_gia" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="tac_gia_sach" Member="saches" ThisKey="tac_gia_id" OtherKey="tac_gia_id" Type="sach" />
+      <Association Name="tac_gia_viet_sach" Member="viet_saches" ThisKey="tac_gia_id" OtherKey="tac_gia_id" Type="viet_sach" />
+    </Type>
+  </Table>
+  <Table Name="dbo.viet_sach" Member="viet_saches">
+    <Type Name="viet_sach">
+      <Column Name="tac_gia_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="sach_id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="sach_viet_sach" Member="sach" ThisKey="sach_id" OtherKey="sach_id" Type="sach" IsForeignKey="true" />
+      <Association Name="tac_gia_viet_sach" Member="tac_gia" ThisKey="tac_gia_id" OtherKey="tac_gia_id" Type="tac_gia" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

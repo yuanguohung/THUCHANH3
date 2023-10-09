@@ -1,0 +1,14 @@
+﻿@model IEnumerable<SachOnline.Models.nha_xuat_ban>
+
+
+<ul class="list-group">
+    <li class="list-group-item active" style="font-weight:bold; text-align:center">SÁCH THEO NHÀ XUẤT BẢN</li>
+    @foreach (var item in Model)
+    {
+        <li class="list-group-item">
+            <a href="@Url.Action("SachTheoNXB", "SachOnline", new { id = item.nha_xuat_ban_id })" style="text-decoration: none; color: black;">
+                @item.ten_nha_xuat_ban
+            </a>
+        </li>
+    }
+</ul>

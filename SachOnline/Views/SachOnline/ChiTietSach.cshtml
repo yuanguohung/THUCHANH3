@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "ChiTietSach";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div <div class="thumbnail">
+    <h4 class="tensach" style="font-size: 40px; text-align: center; color:red">
+        @Model.ten_sach
+    </h4>
+    <img src="~/Images/@Model.anhSP" alt="@Model.ten_sach" style="width: 300px; height: 500px; object-fit: contain; display: block; margin: 0 auto;" />
+    <div class="motasach">
+        <p>
+            @Html.Raw(Model.mo_ta.ToString().Replace("\n", "</p><p>&nbsp&nbsp&nbsp&nbsp&nbsp"))
+        </p>
+    </div>
+    <div style="text-align: right;">
+        <p class="ngaycapnhap">Ngày cập nhật: @Html.FormatValue(@Model.NgayCapNhap, "{0:dd/MM/yyyy}")</p>
+        <p class="giaban">Giá bán: <spam style="color:blue;font-size:30px;">@Html.FormatValue(@Model.gia_tien, "{0:#,##0}") VNĐ</spam></p>
+        <p class="addtocard">
+            <a href="@Url.Action("AddToCard","ShoppingCard", new {id = @Model.sach_id})"
+               class="btn btn-primary" role="button">
+                <span class="glyphicon glyphicon-shopping-card"
+                      aria-hidden="true"></span> Add to Card
+            </a>
+        </p>
+    </div>
+</div>
+
+
